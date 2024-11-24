@@ -1,0 +1,38 @@
+﻿@model LibraryManagementAPI.Models.Student
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<div class="container my-5">
+    <h2 class="text-center mb-4 text-primary">Edit Student</h2>
+
+    <div class="card shadow-lg p-4">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="StudentID" /> <!-- Hidden field to store StudentID -->
+
+            <div class="form-group mb-4">
+                <label asp-for="StudentName" class="control-label fs-5 fw-semibold text-primary"></label>
+                <input asp-for="StudentName" class="form-control form-control-lg" placeholder="Enter student name" />
+                <span asp-validation-for="StudentName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="DOB" class="control-label fs-5 fw-semibold text-primary"></label>
+                <input asp-for="DOB" class="form-control form-control-lg" type="date" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Email" class="control-label fs-5 fw-semibold text-primary"></label>
+                <input asp-for="Email" class="form-control form-control-lg" placeholder="Enter student email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success btn-lg w-45">Save</button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg w-45 text-center">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

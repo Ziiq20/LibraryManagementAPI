@@ -1,0 +1,186 @@
+﻿@model IEnumerable<LibraryManagementAPI.Models.Book>
+
+@{
+    ViewData["Title"] = "Books List";
+}
+
+<!-- Styles placed at the top -->
+<style>
+    .table th, .table td {
+        text-align: left;
+        padding: 15px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-secondary {
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 50px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+    .table-responsive {
+        margin-top: 30px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-striped tbody tr:nth-of-type(even) {
+        background-color: #ffffff;
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+    }
+
+    h1 {
+        color: #007bff;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 45px;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        gap: 10px;
+    }
+
+    /* Style for the table header */
+    .table thead th {
+        background-color: #007bff; /* Blue background */
+        color: white; /* White text */
+        font-weight: bold;
+    }
+</style>
+
+<h1 class="text-center my-5">BOOKS LIST</h1>
+
+<div class="container">
+    <!-- Add New Book Button -->
+    <div class="text-center mb-4">
+        <a asp-action="Create" class="btn-primary">Add New Book</a>
+    </div>
+
+    <!-- Search Box and Clear Button -->
+    <div class="search-container">
+        <input type="text" class="form-control" placeholder="Search by Book ..." id="searchInput" onkeyup="searchBooks()" />
+        <button class="btn btn-secondary" onclick="clearSearch()">Clear</button>
+    </div>
+
+    <!-- Books Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Author Name</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="booksTable">
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>@book.BookName</td>
+                        <td>@book.BookAuthor</td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@book.BookID" class="btn btn-warning btn-sm rounded-pill shadow-sm">
+                                Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@book.BookID" class="btn btn-danger btn-sm rounded-pill shadow-sm" data-toggle="modal" data-target="#deleteModal" onclick="setDeleteId(@book.BookID)">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- JavaScript for Search Functionality -->
+<script>
+    function searchBooks() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toUpperCase();
+        const table = document.getElementById("booksTable");
+        const rows = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName("td");
+            if (cells.length > 0) {
+                const bookName = cells[0].textContent || cells[0].innerText;
+                rows[i].style.display = bookName.toUpperCase().includes(filter) ? "" : "none";
+            }
+        }
+    }
+
+    // Clear the search input
+    function clearSearch() {
+        const input = document.getElementById("searchInput");
+        input.value = "";
+        searchBooks();
+    }
+
+    // Set Delete ID for Modal
+    function setDeleteId(bookId) {
+        document.getElementById("deleteButton").setAttribute("href", "/Books/Delete/" + bookId);
+    }
+</script>
+
+<!-- Modal for Deleting a Book -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this book?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteButton" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

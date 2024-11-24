@@ -1,0 +1,218 @@
+﻿@model IEnumerable<LibraryManagementAPI.Models.Student>
+
+@{
+    ViewData["Title"] = "Students List";
+}
+
+<!-- Custom Styles -->
+<style>
+    h1 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-secondary {
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 50px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+    }
+
+        .table th, .table td {
+            text-align: left;
+            padding: 15px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .table tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .table tbody tr:nth-of-type(even) {
+            background-color: #ffffff;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .btn-warning {
+        background-color: #ffc107;
+        color: white;
+        font-weight: bold;
+        padding: 5px 15px;
+        border-radius: 50px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        font-weight: bold;
+        padding: 5px 15px;
+        border-radius: 50px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 45px;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        gap: 10px;
+    }
+</style>
+
+<div class="container">
+    <!-- Students Header and Add Button -->
+    <h1>STUDENTS LIST</h1>
+    <div class="text-center mb-4">
+        <a asp-action="Create" class="btn-primary">Add New Student</a>
+    </div>
+
+    <!-- Search and Clear -->
+    <div class="search-container">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search by Student Name..." onkeyup="searchStudents()">
+        <button class="btn btn-secondary" onclick="clearSearch()">Clear</button>
+    </div>
+
+    <!-- Students Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>DOB</th>
+                <th>Email</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="studentsTable">
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.StudentName</td>
+                    <td>@student.DOB.ToShortDateString()</td>
+                    <td>@student.Email</td>
+                    <td class="text-center">
+                        <!-- Edit and Delete Buttons -->
+                        <a asp-action="Edit" asp-route-id="@student.StudentID" class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@student.StudentID" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" onclick="setDeleteId(@student.StudentID)">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript for Search Functionality -->
+<script>
+    function searchStudents() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toUpperCase();
+        const table = document.getElementById("studentsTable");
+        const rows = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName("td");
+            if (cells.length > 0) {
+                const studentName = cells[0].textContent || cells[0].innerText;
+                rows[i].style.display = studentName.toUpperCase().includes(filter) ? "" : "none";
+            }
+        }
+    }
+
+    // Clear the search input
+    function clearSearch() {
+        const input = document.getElementById("searchInput");
+        input.value = "";
+        searchStudents();
+    }
+
+    // Set Delete ID for Modal
+    function setDeleteId(studentId) {
+        document.getElementById("deleteButton").setAttribute("href", "/Students/Delete/" + studentId);
+    }
+</script>
+
+<!-- Modal for Deleting a Student -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this student?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteButton" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

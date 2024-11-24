@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0; /* mengekalkan warna latar belakang asal */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        section h1 {
+            font-size: 3.5em;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        section p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style the container for a more modern feel */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Add a shadow to sections for separation */
+        section {
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Responsive effects on links */
+        section a {
+            transition: all 0.3s ease;
+        }
+
+        section a:hover {
+            color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Soft shadow for text */
+        section h1,
+        section p {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Section 1 -->
+        <section>
+            <h2>Welcome to Our Library Management System</h2>
+            <p>Our Library Management System is designed to provide an easy-to-use platform for managing books, users, and transactions. Whether you're a librarian or a student, you'll find everything you need to manage and explore our library with ease.</p>
+        </section>
+
+        <!-- Section 2 -->
+        <section>
+            <h2>Why Choose Our System?</h2>
+            <p>Our system is built with simplicity and efficiency in mind. With user-friendly interfaces, automated features, and real-time tracking, our Library Management System helps you manage library resources seamlessly while saving valuable time.</p>
+        </section>
+
+        <!-- Section 3 -->
+        <section>
+            <h2>Features That Make a Difference</h2>
+            <p>From book checkout to member registration, our system offers a variety of features designed to enhance library operations. Easily track borrowed books, manage member profiles, and streamline administrative tasks, all from one platform.</p>
+        </section>
+    </div>
+
+</body>
+</html>

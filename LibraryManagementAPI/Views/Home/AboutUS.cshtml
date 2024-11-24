@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "AboutUs";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensures the correct layout is used
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .about-container h1 {
+                font-size: 2.8rem;
+                color: black;
+                margin-bottom: 30px;
+            }
+
+            .about-container p {
+                font-size: 1.2rem;
+                color: #555;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+
+            .about-container img {
+                width: 100%;
+                max-width: 300px;
+                margin: 20px auto;
+                border-radius: 50%;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+        .team-section {
+            margin-top: 50px;
+        }
+
+            .team-section h2 {
+                font-size: 2.2rem;
+                color: black;
+                margin-bottom: 30px;
+            }
+
+        .team-members {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            width: 250px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .team-member img {
+                width: 150px; /* Set width to a fixed size */
+                height: 150px; /* Set height to a fixed size */
+                object-fit: cover; /* Ensure images fill the space without distortion */
+                margin-bottom: 15px;
+                border-radius: 50%;
+            }
+
+            .team-member h3 {
+                font-size: 1.5rem;
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            .team-member p {
+                font-size: 1rem;
+                color: #777;
+            }
+    </style>
+</head>
+<body>
+
+ 
+
+
+    <div class="about-container">
+        <h1><b>About Us</b></h1>
+        <p>
+            Our goal is to offer a user-friendly and efficient platform for managing library resources. 
+            We aim to enhance the accessibility and ease of use of libraries by integrating 
+            technology with the traditional library experience.
+        </p>
+        <img src="~/image/bg.png" alt="About Us">
+
+        <div class="team-section">
+            <h2><b>Our Amazing Team</b></h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="~/image/g1.jpg" alt="Team Member 1">
+                    <h3>Haziq</h3>
+                    <p>Librian</p>
+                </div>
+                <div class="team-member">
+                    <img src="~/image/g2.jpg" alt="Team Member 2">
+                    <h3>Wani</h3>
+                    <p>Library Assistant</p>
+                </div>
+                <div class="team-member">
+                    <img src="~/image/g3.jpg" alt="Team Member 3">
+                    <h3>Yuni</h3>
+                    <p>Library technician</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

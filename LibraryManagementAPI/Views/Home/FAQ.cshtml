@@ -1,0 +1,194 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Library Management</title>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: #000000; 
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* FAQ Item */
+        .faq-item {
+            background-color: red;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .faq-item:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                background-color: #e0e0e0; /* Tukar latar belakang kepada kelabu apabila hover */
+            }
+
+        .faq-question {
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000; /* Tukar warna biru kepada hitam */
+            background-color: #f1f1f1;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .faq-question:hover {
+                background-color: grey; /* Tukar latar belakang kepada biru apabila hover */
+                color: #fff; /* Tukar teks kepada putih semasa hover */
+            }
+
+        .faq-answer {
+            padding: 20px;
+            font-size: 16px;
+            color: #555;
+            background-color: #fff;
+            display: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+            /* Show answer with transition */
+            .faq-answer.open {
+                display: block;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="faq-container">
+        <h1 class="faq-title">Frequently Asked Questions</h1>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h4>What is Library ManagementAPI ?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>
+                    LibraryManagementAPI is an advanced solution for managing library resources, inc
+                    luding books, student records, and borrowed materials. It simplifies library 
+                    management processes and enhances the overall user experience.
+                </p>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h4>How can I manage my library resources?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>To manage your library resources effectively, you can use a 
+                    library management system (LMS) to catalog and track books, student records, 
+                    and borrowed materials. This system allows you to streamline borrowing and returns, 
+                    maintain up-to-date records, and ensure resources are easily accessible to users. 
+                    Additionally, regularly updating your inventory and automating tasks like reminders for overdue items can 
+                    help keep everything organized and efficient.</p>
+            </div>
+        </div>
+
+
+        <br />
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h4>Can I customize the library system?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, the library system can be customized to meet 
+                    the specific needs of your library. You can modify features such as cataloging, 
+                    borrowing processes, user roles, and reporting based on your requirements. 
+                    Whether you're looking to add custom fields, integrate with other systems, or personalize the user interface, 
+                    customization options are available to ensure the system aligns with your library’s operations.</p>
+            </div>
+        </div>
+
+
+        <br />
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h4>How do I get support?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>If you need support, you can reach out to our customer service 
+                    team via email at support@librarymanagementapi.com or through our support hotline at 012-3456789. 
+                    You can also access our help center for troubleshooting guides,
+                    FAQs, and tutorials. Our team is available to assist you with any issues you may encounter, 
+                    and we're committed to ensuring your experience with the system is smooth and efficient.</p>
+            </div>
+        </div>
+
+
+        <br />
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h4>Is the library system available online?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, the library system is available online. 
+                    You can access it from any device with an internet connection,
+                    allowing you to manage library resources, check out books, and track your borrowed materials anytime, 
+                    anywhere. Simply log in through the web portal or mobile app to get started.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+
+                question.addEventListener('click', () => {
+                    // Toggle answer visibility
+                    answer.classList.toggle('open');
+
+                    // Optionally, close other answers when one is opened
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.querySelector('.faq-answer').classList.remove('open');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
